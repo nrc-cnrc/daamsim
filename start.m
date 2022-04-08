@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 clear all;
 load('Intercept112.mat','Intruder');
 

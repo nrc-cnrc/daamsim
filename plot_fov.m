@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 function P = plot_fov(a,b,h,k,r)
 % Plot a sensor fov as a pie wedge.
 % a is start of pie wedge, 

@@ -1,5 +1,7 @@
 %AxisAngleRotation.m
+% Copyright (c) 2022 National Research Council Canada
 %n is a 3x1 vector, theta is specified in degrees.
+
 
 function R = AxisAngleRotation(n, theta)
 

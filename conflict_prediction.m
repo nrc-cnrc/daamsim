@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 function [pref_man_time, pref_man_turn, common] = conflict_prediction(i, host,intr, time_resol, nz, wind_speed, wind_dir, maxBank, maxRollRate)
 
 coder.extrinsic('avoidSimplified');

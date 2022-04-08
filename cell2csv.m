@@ -1,4 +1,4 @@
-% this function was found at some Matlab forum
+% Rob Kohr (2022). cell2csv (https://www.mathworks.com/matlabcentral/fileexchange/7601-cell2csv), MATLAB Central File Exchange. Retrieved April 8, 2022.
 function cell2csv(filename,cellArray,delimiter)
 % Writes cell array content into a *.csv file.
 % 

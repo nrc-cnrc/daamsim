@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 function [ out ] = SRT_PARSE( file, DBG )
 %SRT_PARSE: extract aircraft data from srt file
 %   Detailed explanation goes here

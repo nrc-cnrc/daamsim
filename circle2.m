@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 function h = circle2(x,y,r)
 
 d = r*2;

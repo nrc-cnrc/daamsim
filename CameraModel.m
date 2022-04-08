@@ -1,4 +1,4 @@
-%@copyright Flight Research Lab
+% Copyright (c) 2022 National Research Council Canada
 %Developed by Iryna Borshchova 
 %This camera model replays real data and reprojects it on the simulated image plane
 warning('off','all')

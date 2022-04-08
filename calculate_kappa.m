@@ -1,6 +1,5 @@
 function [kappaDeg ] = calculate_kappa(azimuthDeg, alphaDeg)
-%CALCULATE_KAPPA Summary of this function goes here
-%   Detailed explanation goes here
+% Copyright (c) 2022 National Research Council Canada
 
     
     if (azimuthDeg >= 0) 

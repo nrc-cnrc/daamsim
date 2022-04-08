@@ -1,3 +1,4 @@
+% Copyright (c) 2022 National Research Council Canada
 function [ac] = Interpolate(acData, timevector)
                       
             acTime=acData.GpsTime_s;

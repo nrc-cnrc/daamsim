@@ -1,6 +1,7 @@
 %Author: Iryna Borshchova; 
 %Date: Nov 29, 2021
-%Organization: FRL NRC Canada
+%Organization: FRL NRC Ottawa
+% Copyright (c) 2022 National Research Council Canada
 
 clear all;
 

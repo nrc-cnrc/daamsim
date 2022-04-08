@@ -4,6 +4,7 @@
 
 %Purpose: Load an SRT file in the right format depending on the calling
 %function
+% Copyright (c) 2022 National Research Council Canada
 
 
 function srtStream = LoadSRTFile(filename, functionString)
