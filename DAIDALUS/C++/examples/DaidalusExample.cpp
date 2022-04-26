@@ -43,9 +43,19 @@ REMEDY FOR ANY SUCH MATTER SHALL BE THE IMMEDIATE, UNILATERAL
 TERMINATION OF THIS AGREEMENT.
  **/
 
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <math.h>
+ #include <stdio.h>
 #include "Daidalus.h"
+#include "mex.h"
+
 
 using namespace larcfm;
+using namespace std;
+
+
 
 void printDetection(Daidalus& daa) {
   // Aircraft at index 0 is ownship
@@ -236,7 +246,7 @@ void printBands(Daidalus& daa) {
   std::cout << std::endl;
 
   // Last times to maneuver
-  for (int ac_idx=1; ac_idx <= daa.lastTrafficIndex(); ++ac_idx) {
+  for (int ac_idx=1; ac_idx < daa.lastTrafficIndex(); ++ac_idx) {
     TrafficState ac = daa.getAircraftStateAt(ac_idx);
     std::cout << "Last Times to Maneuver with Respect to " << ac.getId() << ":"  << std::endl;
     std::cout << "  " << hdstr << " Maneuver: " << num2str(daa.lastTimeToHorizontalDirectionManeuver(ac_idx),"s")  << std::endl;
@@ -244,7 +254,9 @@ void printBands(Daidalus& daa) {
     std::cout << "  Vertical Speed Maneuver: " << num2str(daa.lastTimeToVerticalSpeedManeuver(ac_idx),"s")  << std::endl;
     std::cout << "  Altitude Maneuver: " << num2str(daa.lastTimeToAltitudeManeuver(ac_idx),"s")  << std::endl;
   }
-  std::cout << std::endl;
+
+
+  //std::cout << std::endl;
 }
 
 void printHorizontalContours(Daidalus& daa) {
@@ -287,55 +299,17 @@ void printHorizontalHazardZones(Daidalus& daa) {
   }
 }
 
-int main(int argc, char* argv[]) {
-  std::cout << "##" << std::endl;
-  std::cout << "## " << Daidalus::release() << std::endl;
-  std::cout << "##\n" << std::endl;
+void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
+int nrhs, const mxArray *prhs[]) /* Input variables */
+{
+
+//  std::cout << "##" << std::endl;
+ // std::cout << "## " << Daidalus::release() << std::endl;
+ // std::cout << "##\n" << std::endl;
   bool verbose = false;
 
   // Declare an empty Daidalus object
   Daidalus daa;
-
-  // A Daidalus object can be configured either programmatically or by using a configuration file.
-  for (int a=1;a < argc; ++a) {
-    std::string arga = argv[a];
-    if ((startsWith(arga,"--conf") || startsWith(arga,"-conf")) && a+1 < argc) {
-      // Load configuration file
-      arga = argv[++a];
-      if (daa.loadFromFile(arga)) {
-        std::cout << "Loading configuration file " << arga << std::endl;
-      } else if (arga == "no_sum") {
-        // Configure DAIDALUS as in DO-365B, without SUM
-        daa.set_DO_365B(true,false);
-      } else if (arga == "nom_a") {
-        // Configure DAIDALUS to Nominal A: Buffered DWC, Kinematic Bands, Turn Rate 1.5 [deg/s]
-        daa.set_Buffered_WC_DO_365(false);
-      } else if (arga == "nom_b") {
-        // Configure DAIDALUS to Nominal B: Buffered DWS, Kinematic Bands, Turn Rate 3.0 [deg/s]
-        daa.set_Buffered_WC_DO_365(true);
-      } else if (arga == "cd3d") {
-        // Configure DAIDALUS to CD3D parameters: Cylinder (5nmi,1000ft), Instantaneous Bands, Only Corrective Volume
-        daa.set_CD3D();
-      } else if (arga == "tcasii") {
-        // Configure DAIDALUS to ideal TCASII logic: TA is Preventive Volume and RA is Corrective One
-        daa.set_TCASII();
-      } else {
-        std::cerr << "File " << arga << " not found" << std::endl;
-        exit(1);
-      }
-    } else if (startsWith(arga,"--verb") || startsWith(arga,"-verb")) {
-      verbose = true;
-    } else if (startsWith(arga,"--h") || startsWith(arga,"-h")) {
-      std::cerr << "Options:" << std::endl;
-      std::cerr << "  --help\n\tPrint this message" << std::endl;
-      std::cerr << "  --config <configuration-file> | no_sum | nom_a | nom_b | cd3d | tcasii\n\tLoad <configuration-file>" << std::endl;
-      std::cerr << "  --verbose\n\tPrint more information" << std::endl;
-      exit(0);
-    } else {
-      std::cerr << "Unknown option " << arga << std::endl;
-      exit(0);
-    }
-  }
 
   if (daa.numberOfAlerters()==0) {
     // If no alerter has been configured, configure alerters as in
@@ -345,10 +319,31 @@ int main(int argc, char* argv[]) {
 
   double t = 0.0;
 
+  double pxo = mxGetScalar(prhs[0]);
+    double pyo = mxGetScalar(prhs[1]);
+    double vxo = mxGetScalar(prhs[2]);
+    double vyo = mxGetScalar(prhs[3]);
+    double pxi = mxGetScalar(prhs[4]);
+    double pyi = mxGetScalar(prhs[5]);
+    double vxi = mxGetScalar(prhs[6]);
+    double vyi = mxGetScalar(prhs[7]);
+    double vxw = mxGetScalar(prhs[8]);
+    double vyw = mxGetScalar(prhs[9]);
+
+    double track_o=atan2(vxo,vyo);
+    double track_i=atan2(vxi,vyi);
+    double track_w=atan2(vxw,vyw);
+
+    double speed_o=sqrt(vxo*vxo+vyo*vyo);
+    double speed_i=sqrt(vxi*vxi+vyi*vyi);
+    double speed_w=sqrt(vxw*vxw+vyw*vyw);
+
   // for all times t (in this example, only one time step is illustrated)
   // Add ownship state at time t
-  Position so = Position::makeLatLonAlt(33.95,"deg", -96.7,"deg", 8700.0,"ft");
-  Velocity vo = Velocity::makeTrkGsVs(206.0,"deg", 151.0,"knot", 0.0,"fpm");
+
+
+  Position so = Position::makeXYZ(pxo,"m", pyo,"m", 100.0,"m");
+  Velocity vo = Velocity::makeTrkGsVs(track_o,"rad", speed_o,"mps", 0.0,"fpm");
   daa.setOwnshipState("ownship",so,vo,t);
 
   // In case of SUM, set uncertainties of ownhip aircraft
@@ -363,8 +358,9 @@ int main(int argc, char* argv[]) {
 
   // Add all traffic states at time t
   // ... some traffic ...
-  Position si = Position::makeLatLonAlt(33.86191658,"deg", -96.73272601,"deg", 9000.0,"ft");
-  Velocity vi = Velocity::makeTrkGsVs(0.0,"deg", 210.0,"knot", 0,"fpm");
+  Position si = Position::makeXYZ(pxi,"m", pyi,"m", 100.0,"m");
+	Velocity vi = Velocity::makeTrkGsVs(track_i,"rad", speed_i,"mps", 0.0,"fpm");
+	daa.addTrafficState("ith-intruder",si,vi);
   int ac_idx = daa.addTrafficState("intruder",si,vi);
   // ... more traffic ...
 
@@ -383,8 +379,9 @@ int main(int argc, char* argv[]) {
   // After all traffic has been added ...
 
   // Set wind vector (TO direction)
-  Velocity wind = Velocity::makeTrkGsVs(45,"deg", 10,"knot", 0,"fpm");
-  daa.setWindVelocityTo(wind);
+
+  //Velocity wind = Velocity::makeTrkGsVs(track_w,"rad", speed_w,"mps", 0.0,"fpm");
+  //daa.setWindField(wind);
 
   // Print Daidalus Object
   if (verbose) {
@@ -392,9 +389,9 @@ int main(int argc, char* argv[]) {
   }
 
   // Print information about the Daidalus Object
-  std::cout << "Number of Aircraft: " << daa.numberOfAircraft() << std::endl;
-  std::cout << "Last Aircraft Index: " << daa.lastTrafficIndex() << std::endl;
-  std::cout <<  std::endl;
+ // std::cout << "Number of Aircraft: " << daa.numberOfAircraft() << std::endl;
+ // std::cout << "Last Aircraft Index: " << daa.lastTrafficIndex() << std::endl;
+ // std::cout <<  std::endl;
 
   // Detect conflicts with every traffic aircraft
   printDetection(daa);
@@ -403,16 +400,26 @@ int main(int argc, char* argv[]) {
   printAlerts(daa);
 
   // Print bands information
+  std::cout << std::endl;
   printBands(daa);
 
-  if (verbose) {
+  //if (verbose) {
     // Print horizontal contours (for display purposes only)
-    printHorizontalContours(daa);
+   // printHorizontalContours(daa);
 
     // Print horizontal protected areas (for display purposes only)
-    printHorizontalHazardZones(daa);
-  }
+   // printHorizontalHazardZones(daa);
+ // }
   // go to next time step
+
+    double man_time[1];
+    man_time[0]=daa.lastTimeToHorizontalDirectionManeuver(ac_idx);
+    //return alpha
+    mxArray *ptr_man_time = mxCreateDoubleMatrix(1, 1 , mxREAL);
+    memcpy ( mxGetPr(ptr_man_time), man_time, sizeof(double));
+    plhs[0]=ptr_man_time;
+
+
 
 }
 

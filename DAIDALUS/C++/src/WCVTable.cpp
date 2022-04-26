@@ -13,9 +13,9 @@
 namespace larcfm {
 
 WCVTable::WCVTable() {
-  DTHR = Units::from("nmi",0.66);
-  ZTHR = Units::from("ft",450);
-  TTHR = 35; // [s]
+  DTHR = Units::from("ft",500);
+  ZTHR = Units::from("ft",100);
+  TTHR = 0; // [s]
   TCOA = 0;  // [s]
   units_["WCV_DTHR"] = "nmi";
   units_["WCV_ZTHR"] = "ft";
@@ -56,7 +56,7 @@ WCVTable::~WCVTable() { }
  * TTHR=35s, TCOA=0.
  */
 const WCVTable& WCVTable::DO_365_Phase_I_preventive() {
-  static WCVTable preventive(0.66,"nmi",700,"ft",35,"s",0,"s");
+  static WCVTable preventive(500,"ft",100,"ft",0,"s",0,"s");
   return preventive;
 }
 
@@ -74,7 +74,7 @@ const WCVTable& WCVTable::DO_365_DWC_Phase_I() {
  * TTHR=0, TCOA=0.
  */
 const WCVTable& WCVTable::DO_365_DWC_Phase_II() {
-  static WCVTable dwc(1500,"ft",450,"ft",0,"s",0,"s");
+  static WCVTable dwc(500,"ft",100,"ft",0,"s",0,"s");
   return dwc;
 }
 
@@ -83,7 +83,7 @@ const WCVTable& WCVTable::DO_365_DWC_Phase_II() {
  * TTHR=0, TCOA=0.
  */
 const WCVTable& WCVTable::DO_365_DWC_Non_Coop() {
-  static WCVTable dwc(2200,"ft",450,"ft",0,"s",0,"s");
+  static WCVTable dwc(500,"ft",100,"ft",0,"s",0,"s");
   return dwc;
 }
 
@@ -92,7 +92,7 @@ const WCVTable& WCVTable::DO_365_DWC_Non_Coop() {
  * TTHR=35s, TCOA=20.
  */
 const WCVTable& WCVTable::Buffered_Phase_I_preventive() {
-  static WCVTable preventive(1.0,"nmi",750,"ft",35,"s",20,"s");
+  static WCVTable preventive(500,"ft",100,"ft",0,"s",20,"s");
   return preventive;
 }
 
@@ -101,7 +101,7 @@ const WCVTable& WCVTable::Buffered_Phase_I_preventive() {
  * TTHR=35s, TCOA=20.
  */
 const WCVTable& WCVTable::Buffered_DWC_Phase_I() {
-  static WCVTable dwc(1.0,"nmi",450,"ft",35,"s",20,"s");
+  static WCVTable dwc(500,"ft",100,"ft",0,"s",20,"s");
   return dwc;
 }
 
