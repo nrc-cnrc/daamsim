@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/58992009/164030483-1e7d1cec-f807-4b95-b92f-a1a5ae8da1b0.png)
 
-# DAAMSIM
+# DAAMSIM V2.0
 
 DAAMSim is a publically available modeling and simulation framework, developed by the National Research Council of Canada (NRC), to support the determination of DAA system requirements, and evaluation of DAA system performance. The framework incorporates the functional components including various sensor, tracker, and avoid models, data replay, visualization tools, and offline metrics. The framework incorporates NRC-modified version of **[NASA DAIDALUS]( https://github.com/nasa/daidalus)** (license is presented in the "DAIDALUS" folder of the repository).  
 
@@ -24,7 +24,10 @@ To run the Simulink simluation, you'll need to have the **[Simulink Add-On](http
 
 1. To run Simulink simulation, execute "clear all"; run start.m then run M1_NRC.slx.
 2. To run Simulink simulation with NASA DAIDALUS alerting, execute "clear all"; run start.m, then run M2_DAIDALUS.slx. Check DAIDALUS output in the form of bands and alerts in Debug->Diagnostics window of the Simulink simulation.
-3. To calculate requirements for a sample DAA system, run MetricsExample.m.
-4. To test camera model, run CameraModel.m
+3. To test camera model, run CameraModel.m
+4. To calculate requirements for a sample DAA system, run MetricsExample.m.
+5. To calculate effectiveness of a sample DAA system against various intruders, run batchRrCalculationDetailsForSpeedArray.m
+6. To calculate cumulative Risk Ratio of a sample DAA system assuming that airspace model (intruder speed distribution) is known, run batchAssembler.m
+7. To evaluate sensitivity of a sample DAA system to sensor FOV and sensor range, run daaSensitivityScript.m
 
 
