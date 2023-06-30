@@ -1,4 +1,5 @@
-![image](https://user-images.githubusercontent.com/58992009/164030483-1e7d1cec-f807-4b95-b92f-a1a5ae8da1b0.png)
+
+![nrc-signature-e-kr](https://github.com/nrc-cnrc/daamsim/assets/58992009/2567046b-bf02-4aa4-bf26-4d1486279131)
 
 # DAAMSIM V2.0
 
