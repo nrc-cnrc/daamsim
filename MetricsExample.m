@@ -156,7 +156,7 @@ for ii=1:length(ground_speed_h_vect)
                 tm(k)=Taumod-pref_man_time+t_delta;
        
                 % calculate min sensor range
-               R_min_m(k)=tm(k)*sqrt(vvel)+DMOD+blind_zone+mission_length+sensor_unc+own_unc;    
+               R_min_m(k)=tm(k)*sqrt(vvel)+blind_zone+mission_length+sensor_unc+own_unc;    
       
                 
                 if pref_man_turn>=0
@@ -328,7 +328,7 @@ for ii=1:length(ground_speed_h_vect)
 
               
                 % calculate min sensor range
-                R_min_m_over(k)=tm(k)*sqrt(vvel)+DMOD+blind_zone+mission_length+own_unc+sensor_unc;    
+                R_min_m_over(k)=tm(k)*sqrt(vvel)+blind_zone+mission_length+own_unc+sensor_unc;    
                 
                 
                 if pref_man_turn>=0
