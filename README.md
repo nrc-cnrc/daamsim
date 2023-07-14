@@ -47,4 +47,4 @@ reproducible.
 
 
 
-![nrc-footer](https://github.com/nrc-cnrc/Canadian-Airspace-Models/assets/1444241/754d7be7-0424-43ce-8b26-94dccb33eba1)
+![nrc-footer](https://github.com/nrc-cnrc/daamsim/blob/main/images/nrc-footer.png)
