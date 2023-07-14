@@ -1,12 +1,10 @@
-![image](https://user-images.githubusercontent.com/58992009/164030483-1e7d1cec-f807-4b95-b92f-a1a5ae8da1b0.png)
-
 # DAAMSIM V2.0
 
 DAAMSim is a publically available modeling and simulation framework, developed by the National Research Council of Canada (NRC), to support the determination of DAA system requirements, and evaluation of DAA system performance. The framework incorporates the functional components including various sensor, tracker, and avoid models, data replay, visualization tools, and offline metrics. The framework incorporates NRC-modified version of **[NASA DAIDALUS]( https://github.com/nasa/daidalus)** (license is presented in the "DAIDALUS" folder of the repository).  
 
-The framework is documented in https://cdnsciencepub.com/doi/abs/10.1139/dsa-2021-0044 and includes the intercept data collected by the NRC after conducting actual collision intercepts between a surrogate RPAS (Bell 205) and multiple manned intruder targets, documented in https://cdnsciencepub.com/doi/full/10.1139/juvs-2021-0005. This data is presented in Matlab structure format, as well as in .daa format which could be replayed using NASA-developed **[UASChorus](https://nasa.github.io/daidalus/)** visualization tool.
+The framework is documented in https://cdnsciencepub.com/doi/abs/10.1139/dsa-2021-0044 and includes the intercept data collected by the NRC after conducting actual collision intercepts between a surrogate RPAS (Bell 205) and multiple manned intruder targets, documented in https://cdnsciencepub.com/doi/full/10.1139/juvs-2021-0005. This data is presented in Matlab structure format, as well as in .daa format which could be replayed using NASA-developed **[UASChorus](https://nasa.github.io/daidalus/)** visualization tool. The approach on how to use DAAMSIM to determine the DAA system's Risk Ratio is documented in https://www.mdpi.com/2504-446X/7/2/127
 
-Currently, only part of the framework is presented for public consumption. Authors are exploring licensing options to re-distribute NRC-modified versions of Matlab sensor models and trackers. Researchers and developers are welcome to contribute and improve the DAAMSIM framework. Contact iryna.borshchova@nrc-cnrc.gc.ca or kris.ellis@nrc-cnrc.gc.ca for further details.
+Currently, only part of the framework is presented for public consumption. Authors are exploring licensing options to re-distribute NRC-modified versions of Matlab sensor models and trackers. Researchers and developers are welcome to contribute and improve the DAAMSIM framework.
 
 ## Requirements
 
@@ -30,4 +28,23 @@ To run the Simulink simluation, you'll need to have the **[Simulink Add-On](http
 6. To calculate cumulative Risk Ratio of a sample DAA system assuming that airspace model (intruder speed distribution) is known, run batchAssembler.m
 7. To evaluate sensitivity of a sample DAA system to sensor FOV and sensor range, run daaSensitivityScript.m
 
+## Support
 
+ 
+
+For technical support, consider the
+[Discussions](https://github.com/nrc-cnrc/daamsim/discussions).
+ 
+
+## Issues
+
+ 
+
+Post [Issues](https://github.com/nrc-cnrc/daamsim/issues) to report
+genuine bugs, mistakes or even small typos in the scripts. Note that issues are **not meant for
+technical support;** open an issue only for an error which is specific and
+reproducible.
+
+
+
+![nrc-footer](https://github.com/nrc-cnrc/Canadian-Airspace-Models/assets/1444241/754d7be7-0424-43ce-8b26-94dccb33eba1)
