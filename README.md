@@ -1,4 +1,6 @@
-# DAAMSIM V2.0
+# DAAMSIM 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8180065.svg)](https://doi.org/10.5281/zenodo.8180065)
 
 DAAMSim is a publicly available modeling and simulation framework, developed by the National Research Council of Canada (NRC), to support the determination of DAA system requirements, and evaluation of DAA system performance. The framework incorporates the functional components including various sensor, tracker, and avoid models, data replay, visualization tools, and offline metrics. The framework incorporates NRC-modified version of **[NASA DAIDALUS]( https://github.com/nasa/daidalus)** (license is presented in the "DAIDALUS" folder of the repository).  
 
